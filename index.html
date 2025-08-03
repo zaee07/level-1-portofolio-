@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/cth.css">
+    <title>Porto || Muhammad Ihza Sofyansah</title>
+</head>
+<body>
+    <header id="header">
+        <h4 class="brand">M. Ihza Sofyansyah</h4>
+        <nav class="nav-links">
+            <a href="#myhero" class="link">About</a>
+            <a href="#pendidikan" class="link">Pendidikan</a>
+            <a href="#achievements" class="link">Achievements</a>
+            <a href="#contact" class="link">Contact</a>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <!-- <div class="link">
+            <a href=""></a>
+        </div> -->
+    </header>
+    <section id="myhero" class="myhero">
+        <div class="profile-container">
+            <img src="/assets/saya.jpg" class="profile" alt="foto saya">
+            <h2 class="profile-name">Muhammad Ihza Sofyansyah</h2>
+            <p class="profile-bio">
+                Santri • Mahasiswa Sistem Informasi<br>
+                🚀 Belajar, Berkarya, Berdoa<br>
+                📍 Brebes, Jawa Tengah (52271)
+            </p>
+        </div>
+    </section>
+    <section id="pendidikan">
+        <h3>Riwayat Pendidikan & Pengalaman Organisasi</h3>
+        <div class="edu-org-container">
+            <div class="left-column">
+            <h4>Riwayat Pendidikan</h4>
+            <ul>
+                <li>SDN Kutamendala 06</li>
+                <li>SMPN 03 Margasari</li>
+                <li>SMKN 01 Tonjong</li>
+            </ul>
+            </div>
+            <div class="right-column">
+            <h4>Pengalaman Organisasi</h4>
+            <ul>
+                <li>HRD HMJ Sistem Informasi (2022–2025)</li>
+                <li>Humas UKM ELC (2022–2025)</li>
+                <li>Sekretaris Remaja Masjid Al-Amin (2021–Now)</li>
+            </ul>
+            </div>
+        </div>
+    </section>
+    <section id="achievements">
+        <h3>Achievement</h3>
+        <ul>
+            <li>Belajar Dasar Git dengan GitHub </li>
+            <li>Belajar Dasar Structured Query Language (SQL)</li>
+            <li>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software </li>
+        </ul>        
+    </section>
+    <section id="contact">
+        <h3>Hubungi Saya</h3>
+        <div class="contact-info">
+            <img src="/assets/icons/instagram.svg" class="icon" alt="instagram">
+            Instagram Account :
+            <a href="http://instagram.com/zaee_07" target="_blank" rel="noopener noreferrer">@zaee_07</a>
+        </div>
+        <div class="contact-info">
+            <img src="/assets/icons/whatsapp.svg" class="icon" alt="whatsapp">
+            Whatsapp Account :
+            <a href="http://wa.me/62859126203623" target="_blank" rel="noopener noreferrer">0859126203623</a>
+        </div>
+        <div class="form">
+            <form action="#" method="get" id="form">
+                <div class="form-isi">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                </div>
+                <div class="form-isi">
+                    <label for="fullname" class="form-label">fullname</label>
+                    <input type="text" class="form-control" name="fullname" id="fullname" placeholder="your fullname" required>
+                </div>
+                <div class="form-isi">
+                    <label for="text" class="form-label">textarea</label>
+                    <textarea class="form-control" name="text" id="text" rows="3" required></textarea>
+                </div>
+                <div class="form-isi">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <h2>Data Tersimpan</h2>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>pesan</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- Data akan ditampilkan di sini -->
+            </tbody>
+        </table>
+        <quote>semoga harimu senin selalu!</quote>
+        <p>made with ❤️</p>
+        <marquee behavior="scroll" direction="left" scrollamount="6" style="color: #e34a4a; font-weight: bold; font-size: 16px; padding: 10px 0;">
+        Dirgahayu Republik Indonesia ke-80! Jayalah selalu bangsaku, tegakkan semangat persatuan! | Indonesia Raya, merdeka, merdeka! Tanahku, negeriku yang kucinta...
+        </marquee>
+
+    </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        }
+
+        function loadTable() {
+            const data = JSON.parse(localStorage.getItem("formData")) || [];
+            const tbody = document.querySelector("#dataTable tbody");
+            tbody.innerHTML = ""; // Kosongkan isi tabel
+
+            data.forEach((item, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                <td data-label="No">${index + 1}</td>
+                <td data-label="Nama">${item.fullname}</td>
+                <td data-label="Email">${item.email}</td>
+                <td data-label="Pesan">${item.text}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+
+
+        document.getElementById("form").addEventListener("submit", function(e) {
+            e.preventDefault();
+        
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+        
+            // Ambil data sebelumnya dari localStorage
+            const dataSebelumnya = JSON.parse(localStorage.getItem("formData")) || [];
+        
+            // Tambahkan data baru
+            dataSebelumnya.push(data);
+        
+            // Simpan kembali
+            localStorage.setItem("formData", JSON.stringify(dataSebelumnya));
+        
+            alert("Data disimpan ke localStorage!");
+            this.reset();  // Kosongkan form
+            loadTable();   // Perbarui tabel
+            // console.log("Jumlah thead:", document.querySelectorAll("#dataTable thead").length);
+        });
+        
+
+        // Tampilkan data saat pertama kali halaman dibuka
+        window.addEventListener("load", loadTable)  
+    </script>
+</body>
+</html>
